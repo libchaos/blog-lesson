@@ -14,9 +14,10 @@ class AbstractPage{
       <!DOCTYPE html>
       <html>
       <head>
+        <meta charset="utf-8"/>
         <link href="//cdn.bootcss.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" rel="stylesheet">
       </head>
-      <body>
+      <body class="container">
         ${this._render()}
       </body>
       </html>

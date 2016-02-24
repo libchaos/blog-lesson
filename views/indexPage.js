@@ -4,15 +4,16 @@
 'use strict';
 var AbstractPage = require('./abstractPage');
 
-class IndexPage extends AbstractPage{
-  constructor(articlelist){
+class IndexPage extends AbstractPage {
+  constructor(articlelist) {
     super();
     this.list = articlelist;
   }
-  _render(){
+
+  _render() {
     let listDOMString = this.list.map(article => `
   <li class="list-group-item"><h3>${article.title}</h3><p>${article.body}</p></li>`).join(' ')
-   return `
+    return `
     <ul class="list-group">
       ${listDOMString}
     </ul>
