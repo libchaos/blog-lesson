@@ -5,38 +5,26 @@
 var http = require('http');
 var database = require('./database');
 var url = require('url');
+var handleRepos = {};
+var addAction = require('./actions/add');
+var delAction = require('./actions/del');
+var updateAction = require('./actions/update');
+var listAction = require('./actions/list');
 
-//test
-var article = {title: 'mytitle', body: 'mybody'};
+handleRepos['/add'] = addAction;
+handleRepos['/del'] = delAction;
+handleRepos['/update'] = updateAction;
+handleRepos['/list'] = listAction;
+
+function getHandle(path){
+    return handleRepos[path];
+}
+
 http.createServer(function (req, res) {
-    var result = url.parse(req.url);
-    var pathname = result.pathname;
-    var query = result.query;
+    let pathname = url.parse(req.url);
+    let handle = getHandle(pathname)
+    handle(req, res);
 
-    console.log(pathname);
-    switch (req.url) {
-        case '/':
-            res.writeHead(200, {'Content-Type': 'text/plain'});
-            res.end(database.list.toString());
-            break;
-        case '/add':
-            if (req.method === 'GET') {
 
-            } else {
 
-            }
-
-            break;
-        case '/del':
-            database.delete(0);
-
-            break;
-        case '/update':
-            if (req.method === 'GET') {
-
-            } else {
-
-            }
-            break;
-    }
 }).listen(3000);
